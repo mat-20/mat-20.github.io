@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8" />
+    <title>Home – Gravener Portfolio</title>
+
+    <!-- SEO Meta -->
+    <meta name="description" content="Welcome to Matt Gravener's portfolio – a showcase of web projects, live demos, and interactive features." />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+
+    <!-- Favicon -->
+    <link rel="icon" type="image/svg+xml" href="./images/favicon.svg" />
+
+    <!-- Open Graph / Facebook -->
+    <meta property="og:title" content="Home – Gravener Portfolio" />
+    <meta property="og:description" content="Explore Matt Gravener's portfolio, including weather tools, interactive demos, and clean UI projects." />
+    <meta property="og:type" content="website" />
+    <meta property="og:url" content="https://yourdomain.com/index.html" />
+    <meta property="og:image" content="https://yourdomain.com/images/home-preview.png" />
+
+    <!-- Twitter Card -->
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:title" content="Home – Gravener Portfolio" />
+    <meta name="twitter:description" content="Explore Matt Gravener's portfolio, including weather tools, interactive demos, and clean UI projects." />
+    <meta name="twitter:image" content="https://yourdomain.com/images/home-preview.png" />
+
+    <!-- Global Styles -->
+    <link rel="stylesheet" href="./styles/global.css" />
+</head>
+
+<body>
+    <header>
+        <div id="navbar">
+            <script type="module" src="./dist/src/index.js"></script>
+
+
+            <script>
+                fetch("navbar.html")
+                    .then(res => res.text())
+                    .then(html => {
+                        document.getElementById("navbar").innerHTML = html;
+                    });
+            </script>
+        </div>
+    </header>
+
+    <main class="container">
+        <h1>2025</h1>
+        <p style="">All pages built with TypeScript + SWC + serve.</p>
+    </main>
+
+    <footer class="page-footer">
+        <div id="time"></div>
+        <p>Matt Gravener, 2025</p>
+    </footer>
+
+    <script>
+
+        // Load navbar
+        fetch("navbar.html")
+            .then(res => res.text())
+            .then(html => {
+                document.getElementById("navbar").innerHTML = html;
+            });
+    </script>
+
+    <script type="module" src="./dist/src/index.js"></script>
+</body>
+</html>
