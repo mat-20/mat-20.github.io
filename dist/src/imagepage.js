@@ -1,4 +1,4 @@
-const API_KEY = 'APIKEY'; // Replace with your Pexels API key
+const API_KEY = 'NknjP3ndVYVANHQAkcOXZsljpXdccOZ1zum8IhMXL3t85hUKYV8zjKXF'; // Replace with your Pexels API key
 const searchForm = document.getElementById('search-form');
 const input = document.getElementById('search-input');
 const results = document.getElementById('image-results');
