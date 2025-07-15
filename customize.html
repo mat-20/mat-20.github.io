@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8" />
+    <title>Customize – Gravener Portfolio</title>
+
+    <!-- SEO Meta -->
+    <meta name="description" content="Customize settings and preferences for your experience on the Gravener Portfolio site." />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+
+    <!-- Favicon -->
+    <link rel="icon" type="image/svg+xml" href="./images/favicon.svg" />
+
+    <!-- Open Graph -->
+    <meta property="og:title" content="Customize – Gravener Portfolio" />
+    <meta property="og:description" content="Adjust site settings like theme, layout, and more." />
+    <meta property="og:type" content="website" />
+    <meta property="og:url" content="https://yourdomain.com/customize.html" />
+    <meta property="og:image" content="https://yourdomain.com/images/customize-preview.png" />
+
+    <!-- Twitter Card -->
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:title" content="Customize – Gravener Portfolio" />
+    <meta name="twitter:description" content="Adjust site settings like theme, layout, and more." />
+    <meta name="twitter:image" content="https://yourdomain.com/images/customize-preview.png" />
+
+    <link rel="stylesheet" href="./styles/global.css" />
+</head>
+
+<body>
+    <div id="navbar"></div>
+
+    <!-- MAIN CONTAINER -->
+    <main class="container">
+        <h1>Theme</h1>
+        <div>
+            <button onclick="setTheme('')">Default</button>
+            <button onclick="setTheme('pink')">Pink</button>
+            <button onclick="setTheme('frog')">Frog</button>
+        </div>
+    </main>
+
+    <!-- FOOTER -->
+    <footer class="page-footer">
+        <div id="time"></div>
+        <p>Matt Gravener, 2025</p>
+    </footer>
+
+    <!-- SCRIPTS -->
+    <script type="module" src="./dist/src/index.js"></script>
+
+
+    <script>
+        fetch("navbar.html")
+            .then(res => res.text())
+            .then(html => {
+                document.getElementById("navbar").innerHTML = html;
+            });
+    </script>
+
+    <script>
+        function setTheme(theme) {
+            const root = document.documentElement;
+
+            root.classList.remove('theme-pink', 'theme-frog');
+
+            if (theme === 'pink') {
+                root.classList.add('theme-pink');
+                localStorage.setItem('theme', 'pink');
+            } else if (theme === 'frog') {
+                root.classList.add('theme-frog');
+                localStorage.setItem('theme', 'frog');
+            } else {
+                localStorage.removeItem('theme');
+            }
+        }
+
+        // Apply stored theme on page load
+        document.addEventListener('DOMContentLoaded', () => {
+            const savedTheme = localStorage.getItem('theme');
+            if (savedTheme) {
+                setTheme(savedTheme);
+            }
+        });
+    </script>
+
+</body>
+</html>

@@ -1,0 +1,176 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8" />
+    <title>Gallery</title>
+    <link rel="stylesheet" href="./styles/global.css" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0" />
+    <link rel="icon" href="./images/favicon.svg" type="image/svg+xml" />
+    <style>
+        .gallery-container {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            max-width: 100%;
+            padding: 2rem;
+        }
+
+        .main-image-container {
+            position: relative;
+            max-width: 90vw;
+            max-height: 70vh;
+            overflow: hidden;
+            border-radius: 12px;
+            box-shadow: 0 6px 20px rgba(0, 0, 0, 0.4);
+        }
+
+            .main-image-container img {
+                width: 100%;
+                height: auto;
+                display: block;
+                object-fit: contain;
+            }
+
+        .thumbs-row {
+            display: flex;
+            gap: 0.5rem;
+            margin-top: 1rem;
+            flex-wrap: wrap;
+            justify-content: center;
+        }
+
+            .thumbs-row img {
+                height: 80px;
+                border-radius: 6px;
+                cursor: pointer;
+                opacity: 0.6;
+                transition: opacity 0.3s, transform 0.2s;
+            }
+
+                .thumbs-row img:hover {
+                    opacity: 1;
+                    transform: scale(1.05);
+                }
+
+                .thumbs-row img.active {
+                    opacity: 1;
+                    border: 2px solid var(--accent-color);
+                }
+
+        .nav-buttons {
+            margin: 1rem 0;
+            display: flex;
+            gap: 1rem;
+        }
+
+            .nav-buttons button {
+                font-size: 1.2rem;
+                padding: 0.5rem 1rem;
+            }
+    </style>
+</head>
+
+<body>
+    <script type="module" src="./dist/src/index.js"></script>
+
+
+    <script>
+        fetch("navbar.html")
+            .then(res => res.text())
+            .then(html => {
+                document.getElementById("navbar").innerHTML = html;
+            });
+    </script>
+
+    <main class="container">
+        <h1>Personal Gallery</h1>
+        <p>A randomized slideshow of images.</p>
+
+        <div class="gallery-container">
+            <div class="main-image-container">
+                <img id="main-image" src="" alt="Main image" />
+            </div>
+
+            <div class="nav-buttons">
+                <button id="prev-btn">← Previous</button>
+                <button id="next-btn">Next →</button>
+            </div>
+
+            <div class="thumbs-row" id="thumbnail-bar"></div>
+        </div>
+    </main>
+
+    <footer class="page-footer">
+        <div id="time"></div>
+        <p>Matt Gravener, 2025</p>
+    </footer>
+
+    <script type="module" src="./dist/src/index.js"></script>
+    <script>
+        const API_KEY = 'NknjP3ndVYVANHQAkcOXZsljpXdccOZ1zum8IhMXL3t85hUKYV8zjKXF';
+
+        fetch("navbar.html")
+            .then(res => res.text())
+            .then(html => {
+                document.getElementById("navbar").innerHTML = html;
+            });
+
+        const mainImage = document.getElementById('main-image');
+        const thumbBar = document.getElementById('thumbnail-bar');
+        const prevBtn = document.getElementById('prev-btn');
+        const nextBtn = document.getElementById('next-btn');
+
+        let images = [];
+        let currentIndex = 0;
+
+        function shuffleArray(array) {
+            for (let i = array.length - 1; i > 0; i--) {
+                const j = Math.floor(Math.random() * (i + 1));
+                [array[i], array[j]] = [array[j], array[i]];
+            }
+            return array;
+        }
+
+        function setMainImage(index) {
+            currentIndex = index;
+            mainImage.src = images[index].src.original;
+            const thumbnails = document.querySelectorAll('.thumbs-row img');
+            thumbnails.forEach((thumb, i) => {
+                thumb.classList.toggle('active', i === index);
+            });
+        }
+
+        function createThumbnail(photo, index) {
+            const thumb = document.createElement('img');
+            thumb.src = photo.src.small;
+            thumb.alt = photo.alt || `Thumbnail ${index}`;
+            thumb.addEventListener('click', () => setMainImage(index));
+            thumbBar.appendChild(thumb);
+        }
+
+        function showNextImage() {
+            currentIndex = (currentIndex + 1) % images.length;
+            setMainImage(currentIndex);
+        }
+
+        function showPrevImage() {
+            currentIndex = (currentIndex - 1 + images.length) % images.length;
+            setMainImage(currentIndex);
+        }
+
+        prevBtn.addEventListener('click', showPrevImage);
+        nextBtn.addEventListener('click', showNextImage);
+
+        fetch('http://localhost:4000/api/search?q=bird&per_page=10')
+            .then(res => res.json())
+            .then(data => {
+                images = shuffleArray(data.photos);
+                images.forEach((photo, index) => createThumbnail(photo, index));
+                setMainImage(0);
+            })
+            .catch(err => {
+                console.error('Failed to load images:', err);
+            });
+    </script>
+</body>
+</html>
