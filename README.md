@@ -40,5 +40,5 @@ Or clone the repo and run locally:
 
 ```bash
 git clone https://github.com/your-username/your-repo-name.git
-cd your-repo-name
+cd mat-20.github.io
 open index.html
