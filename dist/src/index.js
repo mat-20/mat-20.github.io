@@ -32,6 +32,7 @@ async function loadSlideshowImages() {
 
 window.addEventListener('DOMContentLoaded', () => {
     console.log('DOM fully loaded');
+    loadSlideshowImages();
     const savedTheme = localStorage.getItem('theme');
     if (savedTheme === 'pink') {
         document.documentElement.classList.add('theme-pink');
