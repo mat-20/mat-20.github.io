@@ -376,3 +376,57 @@ a {
         object-fit: contain;
         display: block;
     }
+/* ===========================
+   Auto-Scrolling Slideshow
+=========================== */
+.slideshow-scroll-container {
+    position: relative;
+    width: 100%;
+    overflow: hidden;
+    max-width: 90vw;
+    margin: 2rem auto;
+    mask-image: linear-gradient(to right, transparent, black 10%, black 90%, transparent);
+    -webkit-mask-image: linear-gradient(to right, transparent, black 10%, black 90%, transparent);
+}
+
+#slideshow-track {
+    display: flex;
+    gap: 1rem;
+    animation: scroll-horizontal 40s linear infinite;
+    align-items: center;
+    padding: 1rem 0;
+}
+
+    #slideshow-track img {
+        height: 300px;
+        flex-shrink: 0;
+        border-radius: 12px;
+        object-fit: cover;
+        opacity: 0;
+        animation: fadeInSlide 1s ease forwards;
+        animation-delay: var(--delay, 0s);
+    }
+
+/* Fade in per image */
+@keyframes fadeInSlide {
+    from {
+        opacity: 0;
+        transform: scale(0.95);
+    }
+
+    to {
+        opacity: 1;
+        transform: scale(1);
+    }
+}
+
+/* Scroll track */
+@keyframes scroll-horizontal {
+    0% {
+        transform: translateX(0);
+    }
+
+    100% {
+        transform: translateX(-50%);
+    }
+}
