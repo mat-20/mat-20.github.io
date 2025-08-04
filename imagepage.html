@@ -14,17 +14,12 @@
     <meta name="twitter:image" id="twitter-image" content="https://example.com/preview.png" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0">
     <link rel="stylesheet" href="./styles/global.css" />
-
-    <!-- Favicon -->
     <link rel="icon" type="image/svg+xml" href="./images/favicon.svg" />
-
 </head>
 
 <body>
-
     <div id="navbar"></div>
 
-    <!-- MAIN CONTAINER -->
     <main class="container">
         <h1>Image Search</h1>
         <form id="search-form">
@@ -34,7 +29,6 @@
         <div id="image-results"></div>
     </main>
 
-    <!-- FOOTER -->
     <footer class="page-footer">
         <div id="time"></div>
         <p>Matt Gravener, 2025</p>
@@ -43,10 +37,8 @@
         </a>
     </footer>
 
-    <!-- SCRIPTS -->
     <script type="module" src="./dist/src/index.js"></script>
     <script type="module" src="./dist/src/imagepage.js"></script>
-
     <script>
         fetch("navbar.html")
             .then(res => res.text())

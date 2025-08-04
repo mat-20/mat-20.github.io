@@ -3,53 +3,23 @@
 <head>
     <meta charset="UTF-8" />
     <title>Weather – Gravener Portfolio</title>
-
-    <!-- SEO Meta -->
-    <meta name="description" content="Check local weather using your location. Part of the Gravener Portfolio project." />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0" />
-    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-
-    <!-- Favicon -->
     <link rel="icon" type="image/svg+xml" href="./images/favicon.svg" />
-
-    <!-- Open Graph / Facebook -->
     <meta property="og:title" content="Weather – Gravener Portfolio" />
     <meta property="og:description" content="Check your local weather using geolocation and a free API." />
     <meta property="og:type" content="website" />
-    <meta property="og:url" content="https://yourdomain.com/weather.html" />
-    <meta property="og:image" content="https://yourdomain.com/images/weather-preview.png" />
-
-    <!-- Twitter Card -->
-    <meta name="twitter:card" content="summary_large_image" />
-    <meta name="twitter:title" content="Weather – Gravener Portfolio" />
-    <meta name="twitter:description" content="Check your local weather using geolocation and a free API." />
-    <meta name="twitter:image" content="https://yourdomain.com/images/weather-preview.png" />
-
-    <!-- Global Styles -->
     <link rel="stylesheet" href="./styles/global.css" />
 </head>
 
 
 <body>
     <header>
-        <div id="navbar">
-            <script type="module" src="./dist/src/index.js"></script>
-
-
-            <script>
-                fetch("navbar.html")
-                    .then(res => res.text())
-                    .then(html => {
-                        document.getElementById("navbar").innerHTML = html;
-                    });
-            </script>
-        </div>
+        <div id="navbar"></div>
     </header>
 
     <main class="container">
         <h1>Weather</h1>
         <p id="status">Fetching weather data.</p>
-        
+
         <div id="weather"></div>
         <button id="celsius-btn" class="active">°C</button>
         <button id="fahrenheit-btn">°F</button>
@@ -58,13 +28,20 @@
         <button id="mph-btn">mph</button>
     </main>
 
-    <script type="module" src="./dist/src/index.js"></script>
-    <script type="module" src="./dist/src/weather.js"></script>
-
-
     <footer class="page-footer">
         <div id="time"></div>
         <p>Matt Gravener, 2025</p>
     </footer>
+
+    <script type="module" src="./dist/src/index.js"></script>
+    <script type="module" src="./dist/src/weather.js"></script>
+    <script>
+        fetch("navbar.html")
+            .then(res => res.text())
+            .then(html => {
+                document.getElementById("navbar").innerHTML = html;
+            });
+    </script>
+
 </body>
 </html>
