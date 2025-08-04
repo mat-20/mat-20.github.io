@@ -39,6 +39,7 @@ Welcome to my **2025 web portfolio**, a multi-page project built with modern fro
 Or clone the repo and run locally:
 
 ```bash
-git clone https://github.com/your-username/your-repo-name.git
+git clone https://github.com/mat-20/mat-20.github.io
 cd mat-20.github.io
 open index.html
+
