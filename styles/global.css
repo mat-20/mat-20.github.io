@@ -383,7 +383,7 @@ a {
     position: relative;
     width: 100%;
     overflow: hidden;
-    max-width: 90vw;
+    max-width: 100vw;
     margin: 2rem auto;
     mask-image: linear-gradient(to right, transparent, black 10%, black 90%, transparent);
     -webkit-mask-image: linear-gradient(to right, transparent, black 10%, black 90%, transparent);
@@ -392,22 +392,30 @@ a {
 #slideshow-track {
     display: flex;
     gap: 1rem;
-    animation: scroll-horizontal 40s linear infinite;
+    animation: scroll-horizontal 60s linear infinite;
     align-items: center;
     padding: 1rem 0;
 }
 
-    #slideshow-track img {
-        height: 300px;
-        flex-shrink: 0;
-        border-radius: 12px;
-        object-fit: cover;
-        opacity: 0;
-        animation: fadeInSlide 1s ease forwards;
-        animation-delay: var(--delay, 0s);
+.slideshow-scroll-container:hover #slideshow-track {
+    animation-play-state: paused;
+}
+
+#slideshow-track img {
+    height: clamp(250px, 40vh, 500px);
+    flex-shrink: 0;
+    border-radius: 12px;
+    object-fit: cover;
+    opacity: 0;
+    animation: fadeInSlide 1s ease forwards;
+    animation-delay: var(--delay, 0s);
+    transition: transform 0.3s ease;
+}
+
+    #slideshow-track img:hover {
+        transform: scale(1.05);
     }
 
-/* Fade in per image */
 @keyframes fadeInSlide {
     from {
         opacity: 0;
@@ -420,7 +428,6 @@ a {
     }
 }
 
-/* Scroll track */
 @keyframes scroll-horizontal {
     0% {
         transform: translateX(0);
