@@ -302,10 +302,12 @@ a:hover {
 
 .draggable-header {
     background: #333;
-    padding: 10px;
+    padding: 4px 10px;
+    font-size: 12px;
+    text-align: center;
     cursor: move;
     user-select: none;
-    font-weight: bold;
+    font-weight: normal;
 }
 
 .draggable-content {
