@@ -381,7 +381,7 @@ a {
 =========================== */
 .slideshow-scroll-container {
     position: relative;
-    width: 100%;
+    width: 200%;
     overflow: hidden;
     max-width: 100vw;
     margin: 2rem auto;
@@ -392,7 +392,7 @@ a {
 #slideshow-track {
     display: flex;
     gap: 1rem;
-    animation: scroll-horizontal 20s linear infinite;
+    animation: scroll-horizontal 5s linear infinite;
     align-items: center;
     padding: 1rem 0;
 }
