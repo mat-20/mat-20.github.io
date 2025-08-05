@@ -1,35 +1,60 @@
 import { updateMetaTags } from './meta.js';
 console.log('index.js loaded');
 
-async function loadSlideshowImages() {
-    const images = [
-        'slide1.jpg',
-        'slide2.jpg',
-        'slide3.jpg',
-        'slide4.jpg',
-        'slide5.jpg',
-        'slide6.jpg',
-        'slide7.jpg',
-        'slide8.jpg',
-        'slide9.jpg',
-        'slide10.jpg',
-        'slide11.jpg',
-        'slide12.jpg',
-        // add more if needed
-    ];
+const draggables = document.querySelectorAll(".draggable");
+    let zIndexCounter = 1;
 
-    const container = document.getElementById('slideshow-track');
-    const fullList = [...images, ...images]; // loop the list
+    draggables.forEach(container => {
+        const header = container.querySelector(".draggable-header");
+        const resizer = container.querySelector(".resizer");
 
-    fullList.forEach((filename, i) => {
-        const img = document.createElement('img');
-        img.src = `slideshow/${filename}`;
-        img.alt = `Slide ${i + 1}`;
-        img.style.setProperty('--delay', `${i * 0.1}s`);
-        container.appendChild(img);
+        // Bring to front on click
+        container.addEventListener("mousedown", () => {
+            container.style.zIndex = ++zIndexCounter;
+        });
+
+        // Drag logic
+        header.addEventListener("mousedown", (e) => {
+            e.preventDefault();
+            let offsetX = e.clientX - container.offsetLeft;
+            let offsetY = e.clientY - container.offsetTop;
+
+            function onMouseMove(e) {
+                container.style.left = `${e.clientX - offsetX}px`;
+                container.style.top = `${e.clientY - offsetY}px`;
+            }
+
+            function onMouseUp() {
+                document.removeEventListener("mousemove", onMouseMove);
+                document.removeEventListener("mouseup", onMouseUp);
+            }
+
+            document.addEventListener("mousemove", onMouseMove);
+            document.addEventListener("mouseup", onMouseUp);
+        });
+
+        // Resize logic
+        resizer.addEventListener("mousedown", (e) => {
+            e.preventDefault();
+            let startX = e.clientX;
+            let startY = e.clientY;
+            let startWidth = parseInt(getComputedStyle(container).width);
+            let startHeight = parseInt(getComputedStyle(container).height);
+
+            function onMouseMove(e) {
+                container.style.width = `${startWidth + (e.clientX - startX)}px`;
+                container.style.height = `${startHeight + (e.clientY - startY)}px`;
+            }
+
+            function onMouseUp() {
+                document.removeEventListener("mousemove", onMouseMove);
+                document.removeEventListener("mouseup", onMouseUp);
+            }
+
+            document.addEventListener("mousemove", onMouseMove);
+            document.addEventListener("mouseup", onMouseUp);
+        });
     });
-}
-
 window.addEventListener('DOMContentLoaded', () => {
     console.log('DOM fully loaded');
     loadSlideshowImages();
