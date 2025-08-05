@@ -392,7 +392,7 @@ a {
 #slideshow-track {
     display: flex;
     gap: 1rem;
-    animation: scroll-horizontal 60s linear infinite;
+    animation: scroll-horizontal 20s linear infinite;
     align-items: center;
     padding: 1rem 0;
 }
